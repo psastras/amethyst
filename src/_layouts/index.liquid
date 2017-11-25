@@ -1,0 +1,9 @@
+{% include '_layouts/components/header.liquid' %}
+  {{ content }}
+  <div class="posts">
+    <h1 class="content-subhead">Recent Posts</h1>
+    {% for post in posts %}
+      {% include '_layouts/components/summary.liquid' %}
+    {% endfor %}
+  </div>
+{% include '_layouts/components/footer.liquid' %}

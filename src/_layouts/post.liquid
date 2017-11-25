@@ -1,0 +1,14 @@
+{% include '_layouts/components/header.liquid' %}
+  <section class="post">
+    <h1 class="post-title">{{ title }}</h1>
+    <p class="post-meta">
+      {% if author %}
+        By <span class="post-author">{{ author }}</span>
+      {% endif %}
+    </p>
+    <div class="content-subhead"></div>
+    <div class="post-description">
+      {{ content }}
+    </div>
+  </section>
+{% include '_layouts/components/footer.liquid' %}

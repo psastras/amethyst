@@ -1,0 +1,29 @@
+sudo: false
+language: node_js
+node_js:
+  - "8"
+cache:
+  directories:
+  - $HOME/.cargo
+  - $HOME/node_modules
+
+before_script:
+  - export PATH="$PATH:$HOME/.cargo/bin"
+  - curl https://sh.rustup.rs -sSf > rustup.sh
+  - chmod +x rustup.sh
+  - command -v cargo >/dev/null 2>&1 || { ./rustup.sh -y; }
+  - command -v cobalt >/dev/null 2>&1 || { cargo install cobalt-bin; }
+  - >-
+    echo "base_path: \"/amethyst\"" > ./src/_data/meta.yml
+
+script:
+  - npm run build
+  - touch dist/.nojekyll
+
+deploy:
+  provider: pages
+  skip_cleanup: true
+  github_token: $GITHUB_TOKEN
+  local_dir: dist
+  on:
+    branch: master

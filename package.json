@@ -1,0 +1,48 @@
+{
+  "name": "amethyst",
+  "version": "1.0.0",
+  "description": "A static, tiny, blog post site based on Cobalt and Pure.css",
+  "scripts": {
+    "install:cobalt": "cargo install cobalt-bin",
+    "build": "npm-run-all build:*",
+    "build:cobalt": "cobalt build",
+    "build:css": "cpx \"src/**/_styles/*.css\" dist -c uglifycss",
+    "build:purecss":
+      "cpx \"node_modules/purecss/build/{pure-min.css,grids-responsive-min.css}\" dist/_styles",
+    "clean": "rimraf dist",
+    "format": "prettier --write \"*.{json,css}\"",
+    "precommit": "lint-staged",
+    "watch": "npm-run-all --parallel watch:*",
+    "watch:cobalt": "npm-watch build:cobalt",
+    "watch:css": "npm-watch build:css",
+    "watch:purecss": "npm-watch build:purecss",
+    "watch:server": "live-server dist"
+  },
+  "lint-staged": {
+    "*.{json,css}": ["prettier --write", "git add"]
+  },
+  "watch": {
+    "build:cobalt": {
+      "patterns": ["src"],
+      "extensions": "liquid,md,yml"
+    },
+    "build:css": {
+      "patterns": ["src/_styles"],
+      "extensions": "css"
+    }
+  },
+  "author": "Paul Sastrasinh <psastras@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "cpx": "^1.5.0",
+    "husky": "^0.14.3",
+    "lint-staged": "^5.0.0",
+    "live-server": "^1.2.0",
+    "npm-run-all": "^4.1.2",
+    "npm-watch": "^0.3.0",
+    "prettier": "^1.8.2",
+    "purecss": "^1.0.0",
+    "rimraf": "^2.6.2",
+    "uglifycss": "0.0.27"
+  }
+}
